@@ -5,21 +5,13 @@
          <div id="sw_dropdown_{$dropdown_id}" class="ty-dropdown-box__title cm-combination">
         <a href="{"checkout.cart"|fn_url}">
             {hook name="checkout:dropdown_title"}
-                {if $cart.amount}
-                    {include_ext file="common/icon.tpl"
-                        class="ty-icon-cart ty-minicart__icon filled"
-                    }
-    <span class="ty-minicart-title ty-hand">
-        {$cart.amount}
-    </span>
-    {include_ext file="common/icon.tpl" class="ty-icon-down-micro"}
-{else}
-    {include_ext file="common/icon.tpl"
-        class="ty-icon-cart ty-minicart__icon empty"
-    }
-                    <span class="ty-minicart-title empty-cart ty-hand">{__("cart_is_empty")}</span>
-                    {include_ext file="common/icon.tpl" class="ty-icon-down-micro"}
-                {/if}
+                {include_ext file="common/icon.tpl"
+    class="ty-icon-cart ty-minicart__icon filled"
+}
+<span class="ty-minicart-title ty-hand">
+    {$cart.amount|default:0}
+</span>
+{include_ext file="common/icon.tpl" class="ty-icon-down-micro"}
             {/hook}
         </a>
         </div>
