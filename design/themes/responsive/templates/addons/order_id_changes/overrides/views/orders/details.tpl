@@ -304,11 +304,24 @@
                     <div class="ty-orders-shipment__info">
                         {hook name="orders:shipment_info"}
                             <p>{$shipment.shipping}</p>
-                            {if $shipment.carrier}
-                                <p>{__("carrier")}: {$shipment.carrier_info.name nofilter}{if $shipment.tracking_number} ({__("tracking_number")}: {if $shipment.carrier_info.tracking_url}<a target="_blank" href="{$shipment.carrier_info.tracking_url nofilter}">{/if}{$shipment.tracking_number}{if $shipment.carrier_info.tracking_url}</a>{/if}){/if}</p>
-
-                                {$shipment.carrier_info.info nofilter}
-                            {/if}
+                           {if $shipment.carrier}
+    <p>
+        {__("carrier")}: {$shipment.carrier_info.name nofilter}
+        {if $shipment.tracking_number}
+            ({__("tracking_number")}: 
+            {if $shipment.carrier_info.tracking_url}
+                <a target="_blank" href="{$shipment.carrier_info.tracking_url nofilter}">{$shipment.tracking_number}</a>
+            {else}
+                {$shipment.tracking_number}
+            {/if})
+        {/if}
+    </p>
+    {$shipment.carrier_info.info nofilter}
+{elseif $shipment.tracking_number}
+    <p>
+        {__("tracking_number")}: {$shipment.tracking_number}
+    </p>
+{/if}
                         {/hook}
                     </div>
 
@@ -360,16 +373,21 @@
         {/hook}
 
         {/capture}
-        {include file="common/tabsbox.tpl" top_order_actions=$smarty.capture.order_actions content=$smarty.capture.tabsbox active_tab=$smarty.request.selected_section}
 
-    {/if}
+<div class="ty-orders-mobile-flow">
+    {$smarty.capture.order_actions nofilter}
+    {$smarty.capture.tabsbox nofilter}
+</div>
+
+ {/if}
+
 </div>
 
 {hook name="orders:details"}
 {/hook}
 
 {capture name="mainbox_title"}
-    {__("order")}&nbsp;<bdi>#{if $order_info.alternative_id}{$order_info.alternative_id}{else}{$order_info.order_id}{/if}</bdi>
+    {__("order")}&nbsp;<bdi>{if $order_info.alternative_id}{$order_info.alternative_id}{else}{$order_info.order_id}{/if}</bdi>
     <em class="ty-date">({$order_info.timestamp|date_format:"`$settings.Appearance.date_format`, `$settings.Appearance.time_format`"})</em>
     <em class="ty-status">{__("status")}: {include file="common/status.tpl" status=$order_info.status display="view" name="update_order[status]"}</em>
 {/capture}
