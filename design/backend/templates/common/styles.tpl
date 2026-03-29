@@ -85,5 +85,13 @@
     z-index: 100000 !important;
 }
 
+/* === FIX SECOND LANGUAGE DROPDOWN (content language) === */
+
+.dropdown-menu.cm-select-list {
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
 </style>
 {/literal}
