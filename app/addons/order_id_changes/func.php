@@ -46,3 +46,8 @@ function fn_order_id_changes_do_call_request(&$params, $product_data, $cart, $au
         $params['order_id'] = $alternative_id;
     }
 }
+
+function fn_order_id_changes_get_alternative_id($order_id) {
+    $alternative_id = db_get_field("SELECT alternative_id FROM ?:orders WHERE order_id =?i", $order_id);
+    return empty($alternative_id) ? $order_id : $alternative_id;
+}
