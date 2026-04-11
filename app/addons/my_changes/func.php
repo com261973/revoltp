@@ -29,3 +29,42 @@ function fn_revoltp_get_vendor_user($company_id)
         LIMIT 1
     ", $company_id);
 }
+
+function fn_my_changes_block_checkout_cart_products_post(&$cart_products, &$key, &$product, &$cart, &$auth, &$lang_code)
+{
+    if (!empty($product['product_id'])) {
+
+        $images = fn_get_image_pairs(
+            $product['product_id'],
+            'product',
+            'M',
+            true,
+            true,
+            $lang_code
+        );
+
+        if (!empty($images)) {
+            $pair = reset($images);
+            $product['main_pair'] = $pair;
+        }
+    }
+}
+
+function fn_my_changes_get_cart_product_data_post(&$product, &$auth, &$cart, &$hash, &$skip_promotion, &$lang_code)
+{
+    if (!empty($product['product_id'])) {
+
+        $images = fn_get_image_pairs(
+            $product['product_id'],
+            'product',
+            'M',
+            true,
+            true,
+            $lang_code
+        );
+
+        if (!empty($images)) {
+            $product['main_pair'] = reset($images);
+        }
+    }
+}
