@@ -1,0 +1,28 @@
+# IDE
+.idea/
+.vscode/
+
+# Runtime/cache
+var/cache/
+var/compiled/
+var/backups/
+var/files/
+var/debug*
+var/restore/
+var/upgrade/
+var/snapshots/
+
+# Logs
+*.log
+error_log
+
+# Archives
+*.zip
+*.tar
+*.gz
+
+
+# Temp
+*.tmp
+*~
+*.swp
